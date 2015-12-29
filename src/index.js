@@ -9,10 +9,7 @@ export default (pattern, ...args) => {
     const name = file.replace(/\.[\w\d]+$/, '').split('/').pop();
     let task = require(path.resolve(file));
     task = task.default ? task.default : task;
-    if ( typeof task === 'function' ) {
-      task = task.apply(this, args);
-    }
-    tasks[name] = task;
+    tasks[name] = typeof task === 'function' ? task.apply(this, args) : task;
   });
   return tasks;
 };

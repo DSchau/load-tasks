@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register test/index.js",
-    "prepublish": "babel src --out-dir lib",
+    "prepublish": "npm run test && babel src --out-dir lib",
     "dev": "npm run prepublish -- -w"
   },
   "keywords": [
