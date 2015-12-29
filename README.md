@@ -4,6 +4,8 @@ A plugin to output a file/task object based on a specified globbing pattern.
 
 ## Usage
 
+*The examples below show the usage within gulp, but should work with grunt or any other build system (or even outside of a build system!)*
+
 Given the following directory structure:
 
 ```
@@ -12,9 +14,8 @@ Given the following directory structure:
       └── sass.js
       └── watch.js
       └── webpack.js
+└── gulpfile.babel.js
 ```
-
-Let's show a quick example of the usage within a gulp build system.
 
 ### `gulpfile.babel.js` 
 
@@ -30,6 +31,8 @@ const tasks = loadTasks('./build/tasks/*.js', gulp, {
   pkg
 });
 ```
+
+*Note that any arguments following the globbing pattern are passed to the imported tasks/files*
 
 `tasks` is now an object populated with the exported contents of each of the tasks, e.g.
 
