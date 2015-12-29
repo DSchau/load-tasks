@@ -6,7 +6,6 @@ const taskObj = {};
 
 export default (pattern, ...args) => {
   globby.sync(pattern).forEach((file) => {
-    const requirePath = path.resolve(__filename, file);
     const name = file.replace(/\.[\w\d]+$/, '').split('/').pop();
     let task = require(path.resolve(file));
     task = task.default ? task.default : task;
