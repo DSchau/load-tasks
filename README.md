@@ -61,7 +61,7 @@ export default (gulp, config) => {
 
 ```javascript
 {
- sass: {
+ sass() {
   // the gulp sass function we defined above!
  },
  watch() {
