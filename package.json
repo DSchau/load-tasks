@@ -1,0 +1,34 @@
+{
+  "name": "load-tasks",
+  "version": "0.0.1",
+  "description": "A tool to load tasks/files based on a glob pattern, and output file contents as an object",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register test/index.js",
+    "prepublish": "babel src --out-dir lib",
+    "dev": "npm run prepublish -- -w"
+  },
+  "keywords": [
+    "gulp",
+    "load",
+    "tasks",
+    "directory"
+  ],
+  "author": "Dustin Schau",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DSchau/load-tasks.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "assert": "^1.3.0",
+    "babel-cli": "^6.3.17",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4"
+  },
+  "dependencies": {
+    "globby": "^4.0.0"
+  }
+}
