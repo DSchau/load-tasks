@@ -2,7 +2,7 @@
 import globby from 'globby';
 import path from 'path';
 
-const taskObj = {};
+const tasks = {};
 
 export default (pattern, ...args) => {
   globby.sync(pattern).forEach((file) => {
@@ -12,7 +12,7 @@ export default (pattern, ...args) => {
     if ( typeof task === 'function' ) {
       task = task.apply(this, args);
     }
-    taskObj[name] = task;
+    tasks[name] = task;
   });
-  return taskObj;
+  return tasks;
 };
