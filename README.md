@@ -32,10 +32,6 @@ const tasks = loadTasks('./build/tasks/*.js', gulp, {
 });
 ```
 
-*Note that any arguments following the globbing pattern are passed to the imported tasks/files*
-
-`tasks` is now an object populated with the exported contents of each of the tasks, e.g.
-
 ### `build/tasks/sass.js`
 
 ```javascript
@@ -51,6 +47,10 @@ export default (gulp, config) => {
   };
 };
 ```
+
+*Note that any arguments following the globbing pattern are passed to the imported tasks/files*
+
+`const tasks` is now an object populated with the exported contents of each of the tasks, e.g.
 
 ```javascript
 {
