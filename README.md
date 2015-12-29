@@ -21,6 +21,7 @@ Given the following directory structure:
 
 ```javascript
 import gulp from 'gulp';
+import gulpSequence from 'gulp-sequence';
 
 import loadTasks from 'load-tasks';
 import { argv } from 'yargs';
@@ -30,6 +31,12 @@ const tasks = loadTasks('./build/tasks/*.js', gulp, {
   args: argv,
   pkg
 });
+
+gulp.task('sass', tasks.sass);
+gulp.task('watch', tasks.watch);
+gulp.task('webpack', tasks.webpack);
+
+gulp.task('default', gulpSequence(['sass', 'webpack'], 'watch'));
 ```
 
 ### `build/tasks/sass.js`
