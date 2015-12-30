@@ -6,7 +6,6 @@ import tasks from './load-tasks';
 describe('load-tasks', () => {
   it('returns object of task/file names', () => {
     const keys = Object.keys(tasks);
-    console.log(keys);
     expect(keys.length).to.be.above(0);
   });
 

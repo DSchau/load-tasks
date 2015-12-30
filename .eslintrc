@@ -5,6 +5,6 @@
     "no-unused-vars": 1,
     "space-before-function-paren": 0,
     "space-in-parens": 0,
-    "semi": [1, "always"]
+    "semi": [2, "always"]
   }
 }
