@@ -21,7 +21,6 @@ Given the following directory structure:
 
 ```javascript
 import gulp from 'gulp';
-import gulpSequence from 'gulp-sequence';
 
 import loadTasks from 'load-tasks';
 import { argv } from 'yargs';
@@ -36,7 +35,7 @@ gulp.task('sass', tasks.sass);
 gulp.task('watch', tasks.watch);
 gulp.task('webpack', tasks.webpack);
 
-gulp.task('default', gulpSequence(['sass', 'webpack'], 'watch'));
+gulp.task('default', ['sass', 'webpack', 'watch']));
 ```
 
 *Note that any arguments following the globbing pattern are passed to the imported tasks/files, if any tasks/files export a function!*
