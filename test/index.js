@@ -3,13 +3,10 @@ import { expect } from 'chai';
 
 import tasks from './load-tasks';
 
-describe('gulp-load-directory-tasks', () => {
+describe('load-tasks', () => {
   it('returns object of task/file names', () => {
-    expect(Object.keys(tasks).length).to.be.above(0);
-    expect(tasks.common).to.exist;
-    expect(tasks.es6).to.exist;
-    expect(tasks.empty).to.exist;
-    expect(tasks.obj).to.exist;
+    const keys = Object.keys(tasks);
+    expect(keys.length).to.be.above(0);
   });
 
   it('handles common js export', () => {
