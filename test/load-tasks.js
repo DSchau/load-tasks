@@ -1,6 +1,10 @@
 import gulpLoadTasks from '../src/';
 
-export default gulpLoadTasks('./test/tasks/*.js', {
+const globs = [
+  './test/tasks/*.js'
+];
+
+export default gulpLoadTasks(globs, {
   src() {},
   pipe() {},
   dest() {}
