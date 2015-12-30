@@ -1,0 +1,7 @@
+{
+  "extends": "standard",
+  "rules": {
+    "space-in-parens": 0,
+    "semi": [1, "always"]
+  }
+}
