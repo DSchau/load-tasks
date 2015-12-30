@@ -2,9 +2,12 @@
 import globby from 'globby';
 import path from 'path';
 
-export default (pattern, ...args) => {
+export default (glob, ...args) => {
   const tasks = {};
-  for ( let file of globby.sync(pattern) ) {
+  if ( !glob ) {
+    return tasks;
+  }
+  for ( let file of globby.sync(glob) ) {
     const name = file.replace(/\.[\w\d]+$/, '').split('/').pop();
     let task = require(path.resolve(file));
     task = task.default ? task.default : task;
