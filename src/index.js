@@ -7,7 +7,7 @@ import defaultsFn from './defaults';
 
 export const errorMessage = 'A globbing pattern is required as the first argument.';
 
-export default (glob, options = {}) => {
+export default function LoadTasks(glob, options = {}) {
   if ( !glob ) {
     throw new Error(errorMessage);
   }
@@ -23,4 +23,4 @@ export default (glob, options = {}) => {
     }
     return tasks;
   };
-};
+}
