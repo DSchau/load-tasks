@@ -1,13 +1,13 @@
 'use strict';
-import loadTasks, { errorMessage } from '../src/';
+import LoadTasks, { errorMessage } from '../src/';
 
-export { loadTasks, errorMessage };
+export { LoadTasks, errorMessage };
 
 export const testGlob = [
   'test/tasks/*.js'
 ];
 
-export default loadTasks(testGlob)({
+export default new LoadTasks(testGlob)({
   src() {},
   pipe() {},
   dest() {}

@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import globby from 'globby';
 
-import tasks, { loadTasks, errorMessage, testGlob } from './load-tasks';
+import tasks, { LoadTasks, errorMessage, testGlob } from './load-tasks';
 
 const hasFn = (name, obj=tasks) => {
   expect(obj).to.respondTo(name);
@@ -14,11 +14,11 @@ const expected = globby.sync(testGlob).map((file) => {
 
 describe('load-tasks', () => {
   it('throws an error if glob not supplied', () => {
-    expect(() => loadTasks()()).to.throw(errorMessage)
+    expect(() => new LoadTasks()()).to.throw(errorMessage)
   });
 
   it('returns empty object when glob doesn\'t match', () => {
-    const empty = loadTasks('unmatched/folder/*.js')();
+    const empty = LoadTasks('unmatched/folder/*.js')();
     expect(empty).to.deep.equal({});
   });
 
@@ -28,12 +28,12 @@ describe('load-tasks', () => {
 
   describe('options API', () => {
     it('allows file regular expression to be customized', () => {
-      const optionsTasks = loadTasks('test/tasks/es6.js', { fileReplacePattern: ''})();
+      const optionsTasks = new LoadTasks('test/tasks/es6.js', { fileReplacePattern: ''})();
       expect(optionsTasks).to.have.key('es6.js');
     });
 
     it('allows injection to be turned off', () => {
-      const optionsTasks = loadTasks('test/tasks/es6.js', { inject: false })({
+      const optionsTasks = new LoadTasks('test/tasks/es6.js', { inject: false })({
         test: true
       });
       expect(optionsTasks.es6().length).equal(0);
@@ -59,7 +59,7 @@ describe('load-tasks', () => {
 
     it('when function, injects supplied arguments', () => {
       const customObj = { test: true };
-      const customTask = loadTasks('test/tasks/es6.js')(customObj);
+      const customTask = new LoadTasks('test/tasks/es6.js')(customObj);
       expect(customTask.es6()[0]).to.deep.equal(customObj);
     });
   });

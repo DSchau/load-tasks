@@ -22,11 +22,11 @@ Given the following directory structure:
 ```javascript
 import gulp from 'gulp';
 
-import loadTasks from 'load-tasks';
+import LoadTasks from 'load-tasks';
 import { argv } from 'yargs';
 import pkg from './package.json';
 
-const tasks = loadTasks('./build/tasks/*.js')(gulp, {
+const tasks = new LoadTasks('./build/tasks/*.js')(gulp, {
   args: argv,
   pkg
 });
