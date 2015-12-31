@@ -1,32 +1,66 @@
 'use strict';
 import { expect } from 'chai';
+import globby from 'globby';
 
-import tasks from './load-tasks';
+import tasks, { loadTasks, errorMessage, testGlob } from './load-tasks';
+
+const hasFn = (name, obj=tasks) => {
+  expect(obj).to.respondTo(name);
+};
+
+const expected = globby.sync(testGlob).map((file) => {
+  return file.split('/').pop().replace(/\..+$/, '');
+});
 
 describe('load-tasks', () => {
-  it('returns object of task/file names', () => {
-    const keys = Object.keys(tasks);
-    expect(keys.length).to.be.above(0);
+  it('throws an error if glob not supplied', () => {
+    expect(() => loadTasks()()).to.throw(errorMessage)
   });
 
-  it('handles common js export', () => {
-    const { common } = tasks;
-    expect(typeof common).to.equal('function');
+  it('returns empty object when glob doesn\'t match', () => {
+    const empty = loadTasks('unmatched/folder/*.js')();
+    expect(empty).to.deep.equal({});
   });
 
-  it('handles es6 default export', () => {
-    const { es6 } = tasks;
-    expect(typeof es6).to.equal('function');
+  it('returns an object when glob matches', () => {
+    expect(tasks).not.to.be.empty;
   });
 
-  it('exports an object when object', () => {
-    const { obj } = tasks;
-    expect(obj.foo).to.exist;
-    expect(typeof obj.foo).to.equal('function');
+  describe('options API', () => {
+    it('allows file regular expression to be customized', () => {
+      const optionsTasks = loadTasks('test/tasks/es6.js', { fileReplacePattern: ''})();
+      expect(optionsTasks).to.have.key('es6.js');
+    });
+
+    it('allows injection to be turned off', () => {
+      const optionsTasks = loadTasks('test/tasks/es6.js', { inject: false })({
+        test: true
+      });
+      expect(optionsTasks.es6().length).equal(0);
+    });
   });
 
-  it('handles empty file', () => {
-    const { empty } = tasks;
-    expect(typeof empty).to.equal('object');
+  describe('file behavior', () => {
+    it('contains each task/file name', () => {
+      expect(tasks).to.have.all.keys(expected);
+    });
+
+    for ( let args of ['common', 'es6', ['foo', tasks.obj]] ) {
+      const argsArr = args.constructor === Array ? args : [args];
+      it(`handles ${argsArr[0]} export`, () => {
+        hasFn.apply(this, argsArr);
+      });
+    }
+
+    it('handles file with out export(s)', () => {
+      const { ['no-export'] : noExport } = tasks;
+      expect(typeof noExport).to.equal('object');
+    });
+
+    it('when function, injects supplied arguments', () => {
+      const customObj = { test: true };
+      const customTask = loadTasks('test/tasks/es6.js')(customObj);
+      expect(customTask.es6()[0]).to.deep.equal(customObj);
+    });
   });
 });

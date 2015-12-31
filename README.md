@@ -26,7 +26,7 @@ import loadTasks from 'load-tasks';
 import { argv } from 'yargs';
 import pkg from './package.json';
 
-const tasks = loadTasks('./build/tasks/*.js', gulp, {
+const tasks = loadTasks('./build/tasks/*.js')(gulp, {
   args: argv,
   pkg
 });
@@ -38,7 +38,7 @@ gulp.task('webpack', tasks.webpack);
 gulp.task('default', ['sass', 'webpack', 'watch']));
 ```
 
-*Note that any arguments following the globbing pattern are passed to the imported tasks/files, if any tasks/files export a function!*
+*Note that any arguments passed to the closure (2nd function call) are passed to the imported tasks/files, if any tasks/files export a function!*
 
 
 ### `build/tasks/sass.js`

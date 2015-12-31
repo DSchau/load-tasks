@@ -2,16 +2,25 @@
 import globby from 'globby';
 import path from 'path';
 
-export default (glob, ...args) => {
-  const tasks = {};
+import addProperties from './add-properties';
+import defaultsFn from './defaults';
+
+export const errorMessage = 'A globbing pattern is required as the first argument.';
+
+export default (glob, options = {}) => {
   if ( !glob ) {
+    throw new Error(errorMessage);
+  }
+  const defaults = defaultsFn(options);
+  return (...args) => {
+    const tasks = {};
+    for ( let file of globby.sync(glob) ) {
+      const name = file.split('/').pop().replace(defaults.fileReplacePattern, '');
+      let task = addProperties(require(path.resolve(file)));
+      tasks[name] = typeof task === 'function' ?
+        task.apply(this, defaults.inject ? args : []) :
+        task;
+    }
     return tasks;
-  }
-  for ( let file of globby.sync(glob) ) {
-    const name = file.replace(/\.[\w\d]+$/, '').split('/').pop();
-    let task = require(path.resolve(file));
-    task = task.default ? task.default : task;
-    tasks[name] = typeof task === 'function' ? task.apply(this, args) : task;
-  }
-  return tasks;
+  };
 };
