@@ -12,7 +12,7 @@ export default function LoadTasks(glob, options = {}) {
     throw new Error(ERROR_MESSAGE);
   }
   const defaults = defaultsFn(options);
-  return (...args) => {
+  return function taskObject(...args) {
     const tasks = {};
     for ( let file of globby.sync(glob) ) {
       const name = file.split('/').pop().replace(defaults.fileReplacePattern, '');
