@@ -26,7 +26,7 @@ import LoadTasks from 'load-tasks';
 import { argv } from 'yargs';
 import pkg from './package.json';
 
-const tasks = new LoadTasks('./build/tasks/*.js')(gulp, {
+const tasks = new LoadTasks('build/tasks/*.js')(gulp, {
   args: argv,
   pkg
 });
