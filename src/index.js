@@ -5,11 +5,11 @@ import path from 'path';
 import addProperties from './add-properties';
 import defaultsFn from './defaults';
 
-export const errorMessage = 'A globbing pattern is required as the first argument.';
+export const ERROR_MESSAGE = 'A globbing pattern is required as the first argument.';
 
 export default function LoadTasks(glob, options = {}) {
   if ( !glob ) {
-    throw new Error(errorMessage);
+    throw new Error(ERROR_MESSAGE);
   }
   const defaults = defaultsFn(options);
   return (...args) => {

@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import globby from 'globby';
 
-import tasks, { LoadTasks, errorMessage, testGlob } from './load-tasks';
+import tasks, { LoadTasks, ERROR_MESSAGE, testGlob } from './load-tasks';
 
 const hasFn = (name, obj=tasks) => {
   expect(obj).to.respondTo(name);
@@ -14,7 +14,7 @@ const expected = globby.sync(testGlob).map((file) => {
 
 describe('load-tasks', () => {
   it('throws an error if glob not supplied', () => {
-    expect(() => new LoadTasks()()).to.throw(errorMessage)
+    expect(() => new LoadTasks()()).to.throw(ERROR_MESSAGE)
   });
 
   it('returns empty object when glob doesn\'t match', () => {
