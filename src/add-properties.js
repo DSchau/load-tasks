@@ -4,10 +4,9 @@
  */
 export default (task) => {
   if ( task.default ) {
-    for ( let prop in task ) {
-      if ( prop !== 'default' ) {
-        task.default[prop] = task[prop];
-      }
+    const props = Object.keys(task).filter((key) => key !== 'default');
+    for ( let prop of props ) {
+      task.default[prop] = task[prop];
     }
   }
   return task.default ? task.default : task;
