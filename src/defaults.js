@@ -4,7 +4,7 @@ export const DEFAULTS = {
   inject: true
 };
 
-const addOpts = (opts, cloned={}) => {
+const addOpts = (opts, cloned = {}) => {
   for ( const opt in opts ) {
     cloned[opt] = opts[opt];
   }
