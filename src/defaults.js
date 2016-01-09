@@ -1,7 +1,6 @@
 'use strict';
 export const DEFAULTS = {
-  fileReplacePattern: /\..+$/,
-  inject: true
+  fileReplacePattern: /\..+$/
 };
 
 const addOpts = (opts, cloned = {}) => {

@@ -10,7 +10,7 @@ describe('Defaults', () => {
 
   describe('clone function', () => {
     const cloned = defaultsFn({
-      inject: false
+      fileReplacePattern: /\.js/
     });
 
     it('does not modify the original object', () => {
@@ -18,7 +18,7 @@ describe('Defaults', () => {
     });
 
     it('allows passed in options to take precedence', () => {
-      expect(cloned.inject).to.be.false;
+      expect(cloned.fileReplacePattern).not.to.equal(DEFAULTS.fileReplacePattern);
     });
   });
 });

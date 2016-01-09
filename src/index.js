@@ -18,7 +18,7 @@ export default function LoadTasks(glob, options = {}) {
       const name = file.split('/').pop().replace(defaults.fileReplacePattern, '');
       let task = addProperties(require(path.resolve(file)));
       tasks[name] = typeof task === 'function' ?
-        task.apply(this, defaults.inject ? args : []) :
+        task.apply(this, args) :
         task;
     }
     return tasks;
