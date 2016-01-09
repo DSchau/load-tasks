@@ -9,5 +9,5 @@ export default (task) => {
       task.default[prop] = task[prop];
     }
   }
-  return task.default ? task.default : task;
+  return task.default || task;
 };

@@ -1,16 +1,17 @@
 'use strict';
-const defaults = {
+export const DEFAULTS = {
   fileReplacePattern: /\..+$/,
   inject: true
 };
 
-export default (options) => {
-  const cloned = {};
-  for ( const opt in defaults ) {
-    cloned[opt] = defaults[opt];
-  }
-  for ( const option in options ) {
-    cloned[option] = options[option];
+const addOpts = (opts, cloned={}) => {
+  for ( const opt in opts ) {
+    cloned[opt] = opts[opt];
   }
   return cloned;
+};
+
+export default (options) => {
+  const cloned = addOpts(DEFAULTS);
+  return addOpts(options, cloned);
 };

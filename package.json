@@ -4,7 +4,7 @@
   "description": "A tool to load tasks/files based on a glob pattern, and output file contents as an object",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register test/index.js",
+    "test": "mocha --compilers js:babel-register test/*.js",
     "lint": "eslint test/**/*.js || eslint src/*.js",
     "prepublish": "npm run lint && npm run test && babel src --out-dir lib",
     "dev": "npm run prepublish -- -w"

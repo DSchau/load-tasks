@@ -1,10 +1,10 @@
 'use strict';
-import LoadTasks, { ERROR_MESSAGE } from '../src/';
+import LoadTasks, { ERROR_MESSAGE } from '../../src/';
 
 export { LoadTasks, ERROR_MESSAGE };
 
 export const testGlob = [
-  'test/tasks/*.js'
+  'test/fixtures/tasks/*.js'
 ];
 
 export default new LoadTasks(testGlob)({
@@ -12,5 +12,5 @@ export default new LoadTasks(testGlob)({
   pipe() {},
   dest() {}
 }, {
-  value: true
+  someValue: true
 });
