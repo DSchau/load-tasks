@@ -11,6 +11,5 @@ const addOpts = (opts, cloned = {}) => {
 };
 
 export default (options) => {
-  const cloned = addOpts(DEFAULTS);
-  return addOpts(options, cloned);
+  return addOpts(options, addOpts(DEFAULTS));
 };
