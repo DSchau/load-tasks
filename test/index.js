@@ -32,7 +32,7 @@ describe('load-tasks', () => {
       expect(optionsTasks).to.have.key('es6.js');
     });
 
-    xit('allows injection to be turned off', () => {
+    it.skip('allows injection to be turned off', () => {
       const optionsTasks = new LoadTasks('test/fixtures/tasks/es6.js', { inject: false })({
         test: true
       });
