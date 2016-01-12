@@ -1,6 +1,6 @@
 {
   "name": "load-tasks",
-  "version": "0.0.3",
+  "version": "0.0.3-0",
   "description": "A tool to load tasks/files based on a glob pattern, and output file contents as an object",
   "main": "lib/index.js",
   "scripts": {

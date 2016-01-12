@@ -16,7 +16,7 @@ export default function LoadTasks(glob, options = {}) {
     const tasks = {};
     for ( let file of globby.sync(glob) ) {
       const name = file.split('/').pop().replace(defaults.fileReplacePattern, '');
-      let task = addProperties(require(path.resolve(file), args));
+      let task = addProperties(require(path.resolve(file)), args);
       tasks[name] = typeof task === 'function' ?
         task.apply(this, args) :
         task;
