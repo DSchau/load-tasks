@@ -13,21 +13,27 @@ describe('Add properties', () => {
   });
 
   describe('es6 functionality', () => {
-    const es6Task = {
-      default: () => {
-        return 'default';
-      },
-      overload: true
-    };
-    const es6 = AddProps(es6Task);
-
-    it('returns default export', () => {
-      expect(es6).to.have.key('overload');
+    it('returns default export if only export', () => {
+      const es6Task = {
+        default: () => {
+          return 'default';
+        }
+      };
+      const es6 = AddProps(es6Task);
       expect(es6()).to.equal(es6Task.default());
     });
 
-    it('overloads default method with additional properties', () => {
-      expect(es6).to.have.key('overload');
+    it('returns all exports if additional exports', () => {
+      const es6Task = {
+        default: () => {
+          return 'default';
+        },
+        overload: true
+      };
+      const es6 = AddProps(es6Task);
+      expect(es6.overload).to.be.defined;
+      expect(es6.default).to.be.defined;
+      expect(typeof es6.default).to.equal('function');
     });
   });
 });

@@ -60,7 +60,7 @@ describe('load-tasks', () => {
     it('when function, injects supplied arguments', () => {
       const customObj = { test: true };
       const customTask = new LoadTasks('test/fixtures/tasks/es6.js')(customObj);
-      expect(customTask.es6()[0]).to.deep.equal(customObj);
+      expect(customTask.es6().shift()).to.deep.equal(customObj);
     });
   });
 });
