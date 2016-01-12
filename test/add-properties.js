@@ -25,8 +25,10 @@ describe('Add properties', () => {
 
     it('returns all exports if additional exports', () => {
       const es6Task = {
-        default: () => {
-          return 'default';
+        default: (...args) => {
+          return () => {
+            return args;
+          };
         },
         overload: true
       };
