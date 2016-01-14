@@ -18,8 +18,7 @@ describe('load-tasks', () => {
   });
 
   it('returns empty object when glob doesn\'t match', () => {
-    const empty = LoadTasks('unmatched/folder/*.js')();
-    expect(empty).to.deep.equal({});
+    expect(new LoadTasks('unmatched/folder/*.js')()).to.deep.equal({});
   });
 
   it('returns an object when glob matches', () => {
