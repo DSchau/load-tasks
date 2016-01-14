@@ -61,5 +61,16 @@ describe('load-tasks', () => {
       const customTask = new LoadTasks('test/fixtures/tasks/es6.js')(customObj);
       expect(customTask.es6().shift()).to.deep.equal(customObj);
     });
+
+    it('extends task objects when conflicts', () => {
+      const { copy } = new LoadTasks([
+        'test/fixtures/tasks/copy.js',
+        'test/fixtures/tasks-two/copy.js'
+      ])();
+      expect(copy).to.have.all.keys([
+        'assets',
+        'files'
+      ]);
+    });
   });
 });

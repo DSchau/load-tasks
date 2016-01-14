@@ -1,5 +1,6 @@
 'use strict';
 import globby from 'globby';
+import extend from 'extend';
 import path from 'path';
 
 import addProperties from './add-properties';
@@ -20,9 +21,14 @@ export default class LoadTasks {
       for ( let file of globby.sync(this.glob) ) {
         const name = file.split('/').pop().replace(this.defaults.fileReplacePattern, '');
         let task = addProperties(require(path.resolve(file)), args);
-        tasks[name] = typeof task === 'function' ?
+        const injectedTask = typeof task === 'function' ?
           task.apply(this, args) :
           task;
+        if ( tasks[name] && typeof tasks[name] === 'object' && typeof injectedTask === 'object') {
+          tasks[name] = extend(tasks[name], injectedTask);
+        } else {
+          tasks[name] = injectedTask;
+        }
       }
       return tasks;
     };

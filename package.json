@@ -1,6 +1,6 @@
 {
   "name": "load-tasks",
-  "version": "0.0.3-0",
+  "version": "0.0.4",
   "description": "A tool to load tasks/files based on a glob pattern, and output file contents as an object",
   "main": "lib/index.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "mocha": "^2.3.4"
   },
   "dependencies": {
+    "extend": "^3.0.0",
     "globby": "^4.0.0"
   }
 }
