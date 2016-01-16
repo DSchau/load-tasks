@@ -1,4 +1,3 @@
-'use strict';
 import globby from 'globby';
 import extend from 'extend';
 import path from 'path';
