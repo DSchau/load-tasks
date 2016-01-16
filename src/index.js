@@ -21,13 +21,13 @@ export default class LoadTasks {
       for ( let file of globby.sync(this.glob) ) {
         const name = file.split('/').pop().replace(this.defaults.fileReplacePattern, '');
         let task = addProperties(require(path.resolve(file)), args);
-        const injectedTask = typeof task === 'function' ?
+        task = typeof task === 'function' ?
           task.apply(this, args) :
           task;
-        if ( tasks[name] && typeof tasks[name] === 'object' && typeof injectedTask === 'object') {
-          tasks[name] = extend(tasks[name], injectedTask);
+        if ( tasks[name] && typeof tasks[name] === 'object' && typeof task === 'object') {
+          tasks[name] = extend(tasks[name], task);
         } else {
-          tasks[name] = injectedTask;
+          tasks[name] = task;
         }
       }
       return tasks;
