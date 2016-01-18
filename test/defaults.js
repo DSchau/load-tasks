@@ -27,7 +27,7 @@ describe('Defaults', () => {
         { color: 'blue' },
         { color: 'green' }
       ];
-      expect(defaultsFn.apply(this, args).color).to.equal(args.pop().color);
+      expect(defaultsFn(...args).color).to.equal(args.pop().color);
     });
   });
 });

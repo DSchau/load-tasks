@@ -2,7 +2,7 @@
 /*
  * This is a (probably naive) method to add es6 non-default exports to object/fn
  */
-export default (task, args=[]) => {
+export default (task, args = []) => {
   if ( task.default ) {
     const props = Object.keys(task).filter((key) => key !== 'default');
     if ( !props.length ) {

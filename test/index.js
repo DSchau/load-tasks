@@ -47,7 +47,7 @@ describe('load-tasks', () => {
     for ( let args of ['common', 'es6', ['foo', tasks.obj]] ) {
       const argsArr = args.constructor === Array ? args : [args];
       it(`handles ${argsArr[0]} export`, () => {
-        hasFn.apply(this, argsArr);
+        hasFn(...argsArr);
       });
     }
 
