@@ -8,7 +8,7 @@ describe('Defaults', () => {
     expect(DEFAULTS).not.to.be.empty;
   });
 
-  describe('clone function', () => {
+  describe('extend function', () => {
     const cloned = defaultsFn({
       fileReplacePattern: /\.js/
     });
@@ -19,6 +19,15 @@ describe('Defaults', () => {
 
     it('allows passed in options to take precedence', () => {
       expect(cloned.fileReplacePattern).not.to.equal(DEFAULTS.fileReplacePattern);
+    });
+
+    it('allows multiple arguments to extend', () => {
+      const args = [
+        { color: 'red' },
+        { color: 'blue' },
+        { color: 'green' }
+      ];
+      expect(defaultsFn.apply(this, args).color).to.equal(args.pop().color);
     });
   });
 });

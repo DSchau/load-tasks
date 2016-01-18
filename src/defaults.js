@@ -5,5 +5,6 @@ export const DEFAULTS = {
 };
 
 export default (...opts) => {
-  return extend.apply(this, [{}, DEFAULTS].concat(opts));
+  const args = [{}, DEFAULTS].concat(opts);
+  return extend(...args);
 };
