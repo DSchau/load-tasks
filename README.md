@@ -1,6 +1,6 @@
 # load-tasks
 
-A plugin to output a file/task object based on a specified globbing pattern.
+A plugin to output a file/task object based on a passed in folder/array of folders.
 
 ## Usage
 
@@ -26,7 +26,7 @@ import LoadTasks from 'load-tasks';
 import { argv } from 'yargs';
 import pkg from './package.json';
 
-const tasks = new LoadTasks('build/tasks/*.js')(gulp, {
+const tasks = new LoadTasks('./build/tasks')(gulp, {
   args: argv,
   pkg
 });

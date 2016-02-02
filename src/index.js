@@ -1,31 +1,33 @@
-import globby from 'globby';
+import requireDir from 'require-dir';
 import extend from 'extend';
-import path from 'path';
 
-import addProperties from './add-properties';
-import defaultsFn from './defaults';
-
-export const ERROR_MESSAGE = 'A globbing pattern is required as the first argument.';
+export const ERROR_MESSAGE = 'A directory or array of directories is required as the first argument.';
 
 export default class LoadTasks {
-  constructor(glob, options = {}) {
-    if ( !glob ) {
+  constructor(dir) {
+    if ( !dir || !dir.length ) {
       throw new Error(ERROR_MESSAGE);
     }
-    this.glob = glob;
-    this.defaults = defaultsFn(options);
+    this.dirs = [].concat(dir);
 
     return (...args) => {
       const tasks = {};
-      for ( let file of globby.sync(this.glob) ) {
-        const name = file.split('/').pop().replace(this.defaults.fileReplacePattern, '');
-        let task = addProperties(require(path.resolve(file)), args);
-        task = typeof task === 'function' ? task(...args) : task;
-        if ( tasks[name] && typeof tasks[name] === 'object' && typeof task === 'object') {
-          tasks[name] = extend(tasks[name], task);
-        } else {
-          tasks[name] = task;
+      for ( const dir of this.dirs ) {
+        let files;
+        try {
+          files = requireDir(dir);
+          for ( const fileName in files ) {
+            const file = files[fileName];
+            if ( typeof file === 'function' ) {
+              files[fileName] = file(...args);
+            } else if ( file.default && typeof file.default === 'function' ) {
+              files[fileName].default = file.default(...args);
+            }
+          }
+        } catch(exception) {
+          files = {};
         }
+        extend(true, tasks, files);
       }
       return tasks;
     };

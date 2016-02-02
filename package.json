@@ -23,7 +23,9 @@
   "license": "MIT",
   "devDependencies": {
     "assert": "^1.3.0",
+    "ava": "^0.10.0",
     "babel-cli": "^6.3.17",
+    "babel-plugin-add-module-exports": "^0.1.2",
     "babel-preset-es2015": "^6.3.13",
     "babel-register": "^6.3.13",
     "chai": "^3.4.1",
@@ -34,6 +36,6 @@
   },
   "dependencies": {
     "extend": "^3.0.0",
-    "globby": "^4.0.0"
+    "require-dir": "^0.3.0"
   }
 }
