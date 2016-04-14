@@ -2,6 +2,8 @@
 
 A plugin to output a file/task object based on a specified globbing pattern.
 
+Consider using [require-tasks][require-tasks], which is largely a little more polished and flexible.
+
 ## Usage
 
 *The examples below show the usage within gulp, but should work with grunt or any other build system (or even outside of a build system!)*
@@ -72,3 +74,5 @@ export default (gulp, config) => {
  }
 }
 ```
+
+[require-tasks]: https://github.com/DSchau/require-tasks
